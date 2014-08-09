@@ -33,7 +33,8 @@ describe('Account', function(){
     it('should add to balance and add a new transaction object to transactions array', function(){
       var o = {name:'bob smith', photo:'google.com/picture.jpg', type:'Checking', color:'#FF4136', pin:'1990', deposit:'500'};
       var a = new Account(o);
-      a.transaction('deposit', '500');
+      var to = {type:'deposit', amount:'500', pin:'1990'};
+      a.transaction(to);
       expect(a.transactions).to.have.length(1);
       expect(a.transactions[0].type).to.equal('deposit');
       expect(a.transactions[0].id).to.equal(1);
@@ -45,7 +46,9 @@ describe('Account', function(){
     it('should charge a $50 fee if withdrawal amt > balance', function(){
       var o = {name:'bob smith', photo:'google.com/picture.jpg', type:'Checking', color:'#FF4136', pin:'1990', deposit:'50'};
       var a = new Account(o);
-      a.transaction('withdraw', '500');
+      var to = {type:'withdraw', amount:'500', pin:'1990'};
+      a.transaction(to);
+
       expect(a.transactions).to.have.length(1);
       expect(a.transactions[0].type).to.equal('withdraw');
       expect(a.transactions[0].id).to.equal(1);
@@ -54,6 +57,15 @@ describe('Account', function(){
       expect(a.transactions[0].fee).to.equal(50);
       //console.log(a.transactions[0]);
       expect(a.balance).to.equal(-500);
+    });
+    it('should do nothing if pin is incorrect', function(){
+      var o = {name:'bob smith', photo:'google.com/picture.jpg', type:'Checking', color:'#FF4136', pin:'1990', deposit:'500'};
+      var a = new Account(o);
+      var to = {type:'deposit', amount:'500', pin:'2000'};
+      a.transaction(to);
+      
+      expect(a.transactions.length).to.equal(0);
+      expect(a.balance).to.equal(500);
     });
   });
 });
