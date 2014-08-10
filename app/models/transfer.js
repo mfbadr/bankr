@@ -24,7 +24,14 @@ Transfer.create = function( obj, cb){
     var t = new Transfer(obj);
     Transfer.collection.save(t, cb);
   });
-
 };
+
+Transfer.findById = function(id, cb){
+  id = Mongo.ObjectID(id);
+  Transfer.collection.findOne({_id:id}, function(err, trans){
+    cb(trans);
+  });
+};
+
 
 module.exports = Transfer;

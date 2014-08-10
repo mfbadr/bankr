@@ -79,19 +79,21 @@ describe('Account', function(){
     });
   });
   describe('Account.create', function(){
-    it('should create and save a new account to the db', function(){
+    it('should create and save a new account to the db', function(done){
       var o = {name:'bob smith1', photo:'google.com/picture.jpg', type:'Checking', color:'#FF4136', pin:'1990', deposit:'500'};
       Account.create(o, function(err, account){
         expect(account._id).to.be.instanceof(Mongo.ObjectID);
+        done();
       });
     });
   });
   describe('account.findbyId', function(){
-    it('should return one account', function(){
+    it('should return one account', function(done){
       Account.findById(aliceID, function(account){
         console.log(account);
         expect(account).to.be.instanceof(Account);
         expect(account.name).to.equal('Alice');
+        done();
       });
     });
   });
