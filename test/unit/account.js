@@ -1,15 +1,26 @@
 /* jshint expr: true */
-/* global describe, it */
+/* global describe, it, before, beforeEach */
 'use strict';
 
 var expect    = require('chai').expect;
 var Account   = require('../../app/models/account');
-//var dbConnect = require('../../app/lib/mongodb');
-//var Mongo     = require('mongodb');
-//var cp        = require('child_process');
-//var db        = 'tm-test';
+var dbConnect = require('../../app/lib/mongodb');
+var Mongo     = require('mongodb');
+var cp        = require('child_process');
+var db        = 'bankr-test';
+var aliceID = '000000000000000000000001';
 
 describe('Account', function(){
+  before( function(done){
+    dbConnect(db, function(){
+      done();
+    });
+  });
+  beforeEach( function(done){
+    cp.execFile(__dirname + '/../scripts/freshdb.sh', [db], {cwd:__dirname + '/../scripts'}, function(){
+      done();
+    });
+  });
   describe('constructor', function(){
     it('should accept an object and create an account with proper attributes', function(){
       var o = {name:'bob smith', photo:'google.com/picture.jpg', type:'Checking', color:'#FF4136', pin:'1990', deposit:'500'};
@@ -63,9 +74,25 @@ describe('Account', function(){
       var a = new Account(o);
       var to = {type:'deposit', amount:'500', pin:'2000'};
       a.transaction(to);
-      
       expect(a.transactions.length).to.equal(0);
       expect(a.balance).to.equal(500);
+    });
+  });
+  describe('Account.create', function(){
+    it('should create and save a new account to the db', function(){
+      var o = {name:'bob smith1', photo:'google.com/picture.jpg', type:'Checking', color:'#FF4136', pin:'1990', deposit:'500'};
+      Account.create(o, function(err, account){
+        expect(account._id).to.be.instanceof(Mongo.ObjectID);
+      });
+    });
+  });
+  describe('account.findbyId', function(){
+    it('should return one account', function(){
+      Account.findById(aliceID, function(account){
+        console.log(account);
+        expect(account).to.be.instanceof(Account);
+        expect(account.name).to.equal('Alice');
+      });
     });
   });
 });

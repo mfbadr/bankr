@@ -1,5 +1,8 @@
 'use strict';
 
+var _ = require('lodash');
+var Mongo = require('mongodb');
+
 function Account(o){
   this.name = o.name;
   this.date = new Date();
@@ -11,6 +14,10 @@ function Account(o){
   this.transfers = [];
   this.transactions = [];
 }
+
+Object.defineProperty(Account, 'collection', {
+  get: function(){return global.mongodb.collection('accounts');}
+});
 
 Account.prototype.transaction = function(o){
   if( o.pin !== this.pin){
@@ -37,7 +44,27 @@ Account.prototype.transaction = function(o){
   this.transactions.push(newTrans);
 };
 
+Account.create = function(o, cb){
+  var a = new Account(o);
+  Account.collection.save(a, cb);
+};
+
+Account.findById = function(id, cb){
+  id = Mongo.ObjectID(id);
+  Account.collection.findOne({_id:id}, function( err, obj){
+    var acct = reProto(obj);
+    // ADD transfer retrieval
+    cb(acct);
+  });
+};
 //Amount.prototype.transfer({from:mongoid, to:mongoid, amount  }
 //
 
 module.exports = Account;
+
+//HELPER
+//
+function reProto(account){
+  return _.create(Account.prototype, account);
+}
+
