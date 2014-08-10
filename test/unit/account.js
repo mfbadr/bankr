@@ -88,9 +88,10 @@ describe('Account', function(){
     });
   });
   describe('account.findbyId', function(){
-    it('should return one account', function(done){
+    it('should return one account, with attached transfers', function(done){
       Account.findById(aliceID, function(account){
-        console.log(account);
+        //console.log(account);
+        console.log(account.transfers);
         expect(account).to.be.instanceof(Account);
         expect(account.name).to.equal('Alice');
         done();

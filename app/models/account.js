@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Mongo = require('mongodb');
+var Transfer = require('./transfer');
+//var async = require('async');
 
 function Account(o){
   this.name = o.name;
@@ -52,9 +54,11 @@ Account.create = function(o, cb){
 Account.findById = function(id, cb){
   id = Mongo.ObjectID(id);
   Account.collection.findOne({_id:id}, function( err, obj){
-    var acct = reProto(obj);
-    // ADD transfer retrieval
-    cb(acct);
+    Transfer.collection.find( {$or: [{to:obj._id},{from:obj._id}]}).toArray( function(err, transfers){
+      obj.transfers.push(transfers);
+      obj = reProto(obj);
+      cb(obj);
+    });
   });
 };
 //Amount.prototype.transfer({from:mongoid, to:mongoid, amount  }

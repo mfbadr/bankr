@@ -1,5 +1,5 @@
-{"_id":{"$oid":"000000000000000000000001"}, "name":"Alice", "pin":"1111", "color":"#ccc", "balance":"500", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":["100000000000000000000001"] }
-{"_id":{"$oid":"000000000000000000000002"}, "name":"Bob", "pin":"1111", "color":"#ccc", "balance":"600", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":["100000000000000000000001","100000000000000000000002"] }
-{"_id":{"$oid":"000000000000000000000003"}, "name":"Carol", "pin":"1111", "color":"#ccc", "balance":"700", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":["100000000000000000000002","100000000000000000000003"] }
-{"_id":{"$oid":"000000000000000000000004"}, "name":"Dave", "pin":"1111", "color":"#ccc", "balance":"800", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":["100000000000000000000003","100000000000000000000004"] }
-{"_id":{"$oid":"000000000000000000000005"}, "name":"Emily", "pin":"1111", "color":"#ccc", "balance":"900", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":["100000000000000000000004"]}
+{"_id":{"$oid":"000000000000000000000001"}, "name":"Alice", "pin":"1111", "color":"#ccc", "balance":"500", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":[] }
+{"_id":{"$oid":"000000000000000000000002"}, "name":"Bob", "pin":"1111", "color":"#ccc", "balance":"600", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":[] }
+{"_id":{"$oid":"000000000000000000000003"}, "name":"Carol", "pin":"1111", "color":"#ccc", "balance":"700", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":[] }
+{"_id":{"$oid":"000000000000000000000004"}, "name":"Dave", "pin":"1111", "color":"#ccc", "balance":"800", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":[] }
+{"_id":{"$oid":"000000000000000000000005"}, "name":"Emily", "pin":"1111", "color":"#ccc", "balance":"900", "type":"Checking", "photo":"google.com/alice", "transactions":[{}], "transfers":[]}
