@@ -55,7 +55,7 @@ Account.findById = function(id, cb){
   id = Mongo.ObjectID(id);
   Account.collection.findOne({_id:id}, function( err, obj){
     Transfer.collection.find( {$or: [{to:obj._id},{from:obj._id}]}).toArray( function(err, transfers){
-      obj.transfers.push(transfers);
+      obj.transfers = (transfers);
       obj = reProto(obj);
       cb(obj);
     });
@@ -63,6 +63,9 @@ Account.findById = function(id, cb){
 };
 //Amount.prototype.transfer({from:mongoid, to:mongoid, amount  }
 //
+
+//Account.prototype.transfer = function(obj, cb){
+//o { toid, pin, amount}o
 
 module.exports = Account;
 

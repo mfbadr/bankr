@@ -91,10 +91,27 @@ describe('Account', function(){
     it('should return one account, with attached transfers', function(done){
       Account.findById(aliceID, function(account){
         //console.log(account);
+        console.log(account);
+        console.log('Transfers:');
         console.log(account.transfers);
         expect(account).to.be.instanceof(Account);
         expect(account.name).to.equal('Alice');
         done();
+      });
+    });
+  });
+  describe('.transfer', function(){
+    it('should transfer funds from one account to another', function(done){
+      Account.transfers({from:'000000000000000000000002', to:'000000000000000000000003', amount: '50', pin:'1234'}, function(){
+        Account.findById('000000000000000000000002', function(sender){
+          expect(sender.balance).to.be.closeTo(550, 0.1);
+          expect(sender.transfers.length).to.equal(1);
+          Account.findById('000000000000000000000003', function(receiver){
+            expect(receiver.balance).to.be.closeTo(650, 0.1);
+            expect(receiver.transfers.length).to.equal(1);
+            done();
+          });
+        });
       });
     });
   });
