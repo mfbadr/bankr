@@ -34,4 +34,16 @@ exports.transaction = function(req, res){
   });
 };
 
+exports.newtransaction = function(req, res){
+  Account.findById(req.params.id, function(account){
+    //if(account.transaction(req.body) !== 'Incorrect PIN'){
+    //  res.redirect('/accounts/' + req.params.id, {account:account, Moment:Moment});
 
+    //}else{
+      account.transaction(req.body);
+      Account.collection.save(account, function(){
+        res.render('accounts/showone', {account:account, Moment:Moment});
+      });
+    //}
+  });
+};
