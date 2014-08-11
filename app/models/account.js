@@ -62,9 +62,9 @@ Account.all = function(cb){
 
 Account.findById = function(id, cb){
   id = Mongo.ObjectID(id);
-  console.log(id);
+  //console.log(id);
   Account.collection.findOne({_id:id}, function( err, obj){
-    console.log(obj);
+    //console.log(obj);
     Transfer.collection.find( {$or: [{to:obj._id},{from:obj._id}]}).toArray( function(err, transfers){
       
       obj.transfers = (transfers);

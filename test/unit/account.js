@@ -44,14 +44,15 @@ describe('Account', function(){
     it('should add to balance and add a new transaction object to transactions array', function(){
       var o = {name:'bob smith', photo:'google.com/picture.jpg', type:'Checking', color:'#FF4136', pin:'1990', deposit:'500'};
       var a = new Account(o);
-      var to = {type:'deposit', amount:'500', pin:'1990'};
+      var to = {type:'Deposit', amount:'500', pin:'1990'};
       a.transaction(to);
       expect(a.transactions).to.have.length(1);
-      expect(a.transactions[0].type).to.equal('deposit');
+      expect(a.transactions[0].type).to.equal('Deposit');
       expect(a.transactions[0].id).to.equal(1);
       expect(a.transactions[0].date).to.respondTo('getDay');
       expect(a.transactions[0].amount).to.equal(500);
       expect(a.transactions[0].fee).to.equal(0);
+      //console.log(a.transactions[0]);
       expect(a.balance).to.equal(1000);
     });
     it('should charge a $50 fee if withdrawal amt > balance', function(){
