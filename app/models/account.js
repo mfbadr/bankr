@@ -35,7 +35,7 @@ Account.prototype.transaction = function(o){
   newTrans.id = this.transactions.length + 1;
   newTrans.fee = 0;
 
-  this.balance += (o.type === 'deposit') ? newTrans.amount : -newTrans.amount;
+  this.balance += (o.type === 'Deposit') ? newTrans.amount : -newTrans.amount;
 
   if(this.balance <= 0){
     newTrans.fee = 50;
