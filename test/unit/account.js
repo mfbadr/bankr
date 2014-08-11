@@ -92,7 +92,7 @@ describe('Account', function(){
       Account.findById(aliceID, function(account){
         //console.log(account);
         //console.log(account);
-        console.log('Transfers:');
+        //console.log('Transfers:');
         //console.log(account.transfers);
         expect(account).to.be.instanceof(Account);
         expect(account.name).to.equal('Alice');

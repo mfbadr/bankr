@@ -51,6 +51,15 @@ Account.create = function(o, cb){
   Account.collection.save(a, cb);
 };
 
+Account.all = function(cb){
+  Account.collection.find().toArray( function( err, accounts){
+    var accts = accounts.map(function(account){
+      return reProto(account);
+    });
+    cb(accts);
+  });
+};
+
 Account.findById = function(id, cb){
   id = Mongo.ObjectID(id);
   Account.collection.findOne({_id:id}, function( err, obj){

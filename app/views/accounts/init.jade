@@ -1,0 +1,29 @@
+extends ../shared/template
+block content
+  #newAccount
+    form(method="post", action="/accounts/new")
+      table
+        tr
+          td:  label Name
+          td:  input(type='text', name='name')
+        tr
+          td:  label color
+          td:  input(type='color', name='color', placeholder='#ccc')
+        tr
+          td:  label Photo URL
+          td:  input(type='text', name='photo')
+        tr
+          td: label type
+          td: select(name='type')
+            option(value='Checking') Checking
+            option(value='Savings') Savings
+        tr
+          td: label PIN
+          td: input(type='text', name='pin', placeholder='4-digit pin')
+        tr
+          td: label Deposit
+          td: input(type='number', name='deposit', placeholder='Initial balance')
+        tr
+          td(colspan='2'): button Create Account
+
+

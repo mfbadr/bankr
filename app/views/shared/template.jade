@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Bankr
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    .wrapper
+      .header
+        h1 Bankr
+        nav
+          ul
+            li: a(href='/accounts/new') Add Account
+            li: a(href='/accounts') View Accounts
+      .content
+        block content
