@@ -1,0 +1,16 @@
+extends ../shared/template
+block content
+  h1 #{account.name + '\'s ' + account.type + 'Account'}
+  form(method='post', href='/accounts/#{account._id}/transaction')
+    p Transaction Type
+    label Deposit
+    input(type='radio', name='type', value='Deposit')
+    label Withdrawal
+    input(type='radio', name='type', value='Withdrawal')
+    label PIN
+    input(type='text', name='pin', placeholder='PIN')
+    label Amount
+    input(type='number', name='amount')
+    button create transaction
+      
+

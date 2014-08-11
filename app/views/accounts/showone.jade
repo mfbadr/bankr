@@ -8,11 +8,9 @@ block content
         li= account.type
         li #{Moment(account.date).format('ll')}
         li
-          form(method="get", href="accounts/#{account._id}/transaction}")
-            button New Transaction
+          a( href="/accounts/#{account._id}/transaction")  New Transaction
         li
-          form(method="get", href="accounts/#{account._id}/transfer}")
-            button New Transfer
+          a( href="/accounts/#{account._id}/transfer")  New Transfer
     #transactions
       h3 Transactions
       table
