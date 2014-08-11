@@ -10,7 +10,8 @@ block content
       tbody
         each account in accounts
           tr
-            td= account.name
+            td
+              a(href="account/#{account._id}")= account.name
             td= account.balance
             td= account.type
             td #{Moment(account.date).format('ll')}
