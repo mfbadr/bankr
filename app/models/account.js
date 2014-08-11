@@ -61,11 +61,29 @@ Account.findById = function(id, cb){
     });
   });
 };
-//Amount.prototype.transfer({from:mongoid, to:mongoid, amount  }
-//
 
-//Account.prototype.transfer = function(obj, cb){
-//o { toid, pin, amount}o
+Account.transfer = function(o, cb){
+  o.amount *= 1;
+  Account.findById(o.from, function(sender){
+    //console.log(o.pin, sender.pin, o.amount + 25, sender.balance)
+    if( o.pin === sender.pin && o.amount + 25 <= sender.balance){
+      sender.balance -= (o.amount + 25);
+      Account.collection.save(sender, function(){
+        Account.findById(o.to, function(receiver){
+          o.amount = o.amount * 1;
+          receiver.balance = receiver.balance * 1;
+          receiver.balance += o.amount;
+          Account.collection.save(receiver, function(){
+            Transfer.create({from:sender._id, to:receiver._id, amount:o.amount}, function(){
+              cb();
+            });
+          });
+        });
+      });
+    }else{if(cb){cb();}
+    }
+  });
+};
 
 module.exports = Account;
 
