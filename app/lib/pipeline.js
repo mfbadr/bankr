@@ -17,6 +17,8 @@ module.exports = function(app, express){
   app.get('/accounts/:id/transaction', accounts.transaction);
 
   app.post('/accounts/:id/transaction', accounts.newtransaction);
+  app.get('/accounts/:id/transfer', accounts.transfer);
+  app.post('/accounts/:id/transfer', accounts.newtransfer);
 
   console.log('Pipeline Configured');
 };

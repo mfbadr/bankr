@@ -40,10 +40,11 @@ block content
           th fee
         tbody
           each transfer in account.transfers
-            td= transfer.id
-            td #{Moment(transfer.date).format('ll')}
-            td= transfer.from
-            td= transfer.to
-            td= amount
-            td 25
+            tr
+              td= transfer.id
+              td #{Moment(transfer.date).format('ll')}
+              td= transfer.from
+              td= transfer.to
+              td= amount
+              td 25
 

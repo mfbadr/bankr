@@ -47,3 +47,19 @@ exports.newtransaction = function(req, res){
     //}
   });
 };
+
+exports.transfer = function(req, res){
+  Account.findById(req.params.id, function(account){
+    Account.all(function(accounts){
+      res.render('accounts/transfer', {account:account, Moment:Moment, accounts:accounts});
+    });
+  });
+};
+
+exports.newtransfer = function(req, res){
+  Account.transfer(req.body, function(){
+    Account.findById(req.params.id, function(account){
+      res.render('accounts/showone',  {account:account, Moment:Moment});
+    });
+  });
+};

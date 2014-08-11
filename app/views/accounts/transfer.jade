@@ -1,0 +1,16 @@
+extends ../shared/template
+block content
+  #transfer
+    form(method="post", action="/accounts/#{account._id}/transfer")
+      label From
+      select(name='from')
+        option(value='#{account._id}') #{account.name}
+      label To
+      select(name='to')
+        each acct in accounts
+          option(value='#{acct._id}') #{acct.name}
+      label PIN
+      input(type='text', name='pin', placeholder='PIN')
+      label Amount
+      input(type='number', name='amount')
+      button create transfer
