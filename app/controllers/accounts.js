@@ -14,9 +14,22 @@ exports.create = function(req, res){
   });
 };
 
-exports.showall = function(req, res){
+exports.showAll = function(req, res){
   Account.all(function(accounts){
     console.log(accounts);
     res.render('accounts/showall', {accounts:accounts, Moment:Moment});
+  });
+};
+
+exports.showOne = function(req, res){
+  Account.findById(req.params.id, function(account){
+    res.render('accounts/showone', {account:account, Moment:Moment});
+  });
+};
+
+
+exports.transaction = function(req, res){
+  Account.findById(req.params.id, function(account){
+    res.render('accounts/transaction', {account:account, Moment:Moment});
   });
 };

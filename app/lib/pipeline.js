@@ -11,8 +11,9 @@ module.exports = function(app, express){
 
   app.get('/accounts/new', accounts.init);
   app.post('/accounts/new', accounts.create);
-  app.get('/accounts', accounts.showall);
+  app.get('/accounts', accounts.showAll);
 
+  app.get('/accounts/:id', accounts.showOne);
   //app.post('/tasks', tasks.create);
 
   console.log('Pipeline Configured');

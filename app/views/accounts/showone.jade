@@ -1,0 +1,51 @@
+extends ../shared/template
+block content
+  #showone
+    #profile
+      ul
+        li= account.name
+        li Balance: #{account.balance}
+        li= account.type
+        li #{Moment(account.date).format('ll')}
+        li
+          form(method="get", href="accounts/#{account._id}/transaction}")
+            button New Transaction
+        li
+          form(method="get", href="accounts/#{account._id}/transfer}")
+            button New Transfer
+    #transactions
+      h3 Transactions
+      table
+        thead
+          th id
+          th date
+          th type
+          th amount
+          th fee
+        tbody
+          each transaction in account.transactions
+            tr
+              td= transaction.id
+              td #{Moment(transaction.date).format('ll')}
+              td= transaction.type
+              td= transaction.amount
+              td= transaction.fee
+    #transfers
+      h3 Transfers
+      table
+        thead
+          th id
+          th date
+          th from
+          th to
+          th amount
+          th fee
+        tbody
+          each transfer in account.transfers
+            td= transfer.id
+            td #{Moment(transfer.date).format('ll')}
+            td= transfer.from
+            td= transfer.to
+            td= amount
+            td 25
+

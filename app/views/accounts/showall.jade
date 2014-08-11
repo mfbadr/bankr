@@ -11,7 +11,7 @@ block content
         each account in accounts
           tr
             td
-              a(href="account/#{account._id}")= account.name
+              a(href="/accounts/#{account._id}")= account.name
             td= account.balance
             td= account.type
             td #{Moment(account.date).format('ll')}
